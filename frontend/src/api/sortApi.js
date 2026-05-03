@@ -1,4 +1,4 @@
-const BASE = '/api';
+const BASE = import.meta.env.VITE_API_BASE_URL || '/api';
 
 export async function sortArray(array, algorithm = 'both') {
   const res = await fetch(`${BASE}/sort`, {
