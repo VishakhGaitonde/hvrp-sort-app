@@ -1,0 +1,102 @@
+:root {
+  --bg: #0a0a0f;
+  --bg2: #111118;
+  --bg3: #1a1a24;
+  --surface: #16161f;
+  --border: #2a2a3a;
+  --border-bright: #3d3d55;
+
+  --hvrp: #00e5ff;
+  --hvrp-dim: rgba(0, 229, 255, 0.15);
+  --hvrp-glow: rgba(0, 229, 255, 0.4);
+
+  --merge: #ff6b35;
+  --merge-dim: rgba(255, 107, 53, 0.15);
+  --merge-glow: rgba(255, 107, 53, 0.4);
+
+  --compare: #ffd60a;
+  --sorted: #39ff14;
+  --text: #e8e8f0;
+  --text-dim: #888899;
+  --text-muted: #555566;
+
+  --radix-color: #b44fff;
+  --vectorized-color: #00e5ff;
+  --parallel-color: #39ff14;
+
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-display);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scanline texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+
+button {
+  font-family: var(--font-display);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--hvrp);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--hvrp-glow);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px var(--hvrp-glow); }
+  50% { box-shadow: 0 0 20px var(--hvrp-glow), 0 0 40px var(--hvrp-dim); }
+}
+
+@keyframes bar-pop {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(1.05); }
+  100% { transform: scaleY(1); }
+}
